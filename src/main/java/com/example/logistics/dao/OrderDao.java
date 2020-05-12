@@ -23,7 +23,9 @@ public class OrderDao {
             "       s.account  as deliveryPerson," +
             "       o.status   as orderStatus," +
             "       f.rate," +
-            "       f.remark " +
+            "       f.remark ," +
+            "       c.id as customerId ," +
+            "       c.nickname " +
             "from `order` o " +
             "         left join customer c on o.customer_id = c.id" +
             "         left join feedback f on c.id = f.customer_id" +
