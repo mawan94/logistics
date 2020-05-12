@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Order {
-    private String orderId;
+    private String id;
     private String customerId;
     private String staffId;
     private int status;

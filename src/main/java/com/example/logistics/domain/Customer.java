@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class Customer {
-    private String customerId;
+    private Integer id;
     private String nickname;
     private String account;
     private String pwd;
     private String email;
+    private int type;
 }
