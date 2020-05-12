@@ -32,8 +32,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#">CUSTOMER</a></li>
-                <li><a href="#">STAFF</a></li>
+                <li><a href="/user-index" >USER</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div>
