@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,7 +24,9 @@ public class OrderDao {
             "       s.account  as deliveryPerson," +
             "       o.status   as orderStatus," +
             "       f.rate," +
-            "       f.remark " +
+            "       f.remark ," +
+            "       c.id as customerId ," +
+            "       c.nickname " +
             "from `order` o " +
             "         left join customer c on o.customer_id = c.id" +
             "         left join feedback f on c.id = f.customer_id" +
@@ -37,7 +40,8 @@ public class OrderDao {
             "         left join staff s on f.staff_id = s.id";
 
     public Page<OrderDTO> page(Pageable pageable) {
-        List<OrderDTO> data = namedParameterJdbcTemplate.queryForList(SQL + " limit :offset, :pageSize", new BeanPropertySqlParameterSource(pageable), OrderDTO.class);
+        List<OrderDTO> data = namedParameterJdbcTemplate.query(SQL + " limit :offset, :pageSize", new BeanPropertySqlParameterSource(pageable),
+                new BeanPropertyRowMapper<>(OrderDTO.class));
         long total = namedParameterJdbcTemplate.queryForObject(COUNT_SQL, Collections.emptyMap(), Long.class);
         return new PageImpl<>(data, pageable, total);
     }

@@ -12,4 +12,6 @@ public class OrderDTO {
     private String orderStatus;
     private Integer rate;
     private String remark;
+    private String customerId;
+    private String nickName;
 }
