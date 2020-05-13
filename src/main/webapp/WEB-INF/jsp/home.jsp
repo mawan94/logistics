@@ -13,8 +13,6 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-<%--Hi JSP. 现在时间是 ${now}--%>
-
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -39,74 +37,12 @@
 </nav>
 
 
-<table class="table table-striped">
-    <caption>ORDER_LIST</caption>  <!--标题标签，居中显示，仅有一个标题-->
-    <tr>
-        <th>ORDER_ID</th>
-        <th>CUSTOMER_NAME</th>
-        <th>CUSTOMER_EMAIL</th>
-        <th>DELIVERY_PERSON</th>
-        <th>ORDER_STATUS</th>
-        <th>RATE</th>
-        <th>REMARK</th>
-    </tr>
-    <tr>
-        <td>8000</td>  <!--td标签：普通表格，内容左对齐-->
-        <td>10000</td>
-        <td>123@qq.com</td>
-        <td>
-            <div class="dropup">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    Tom
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-            </div>
-        </td>
-        <td>
-            <div class="dropup">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    SHIPPING
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-            </div>
-        </td>
-        <td>5</td>
-        <td>THANK YOU</td>
-    </tr>
-</table>
+<table class="table table-striped" id="data-list"></table>
+
 
 <div style="display: flex;align-items: center;justify-content: center;width: 100%">
     <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+        <ul class="pagination" id="page-bar">
         </ul>
     </nav>
 </div>
@@ -121,44 +57,44 @@
 <form class="form-horizontal">
 
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">SENDER</label>
+        <label for="sender" class="col-sm-2 control-label">SENDER</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail113" placeholder="SENDER">
+            <input type="email" class="form-control" id="sender" placeholder="SENDER">
         </div>
     </div>
 
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">RECIPIENT</label>
+        <label for="recipient" class="col-sm-2 control-label">RECIPIENT</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="RECIPIENT">
+            <input type="email" class="form-control" id="recipient" placeholder="RECIPIENT">
         </div>
     </div>
 
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">RECIPIENT_PHONE</label>
+        <label for="recipientPhone" class="col-sm-2 control-label">RECIPIENT_PHONE</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail31" placeholder="RECIPIENT_PHONE">
+            <input type="email" class="form-control" id="recipientPhone" placeholder="RECIPIENT_PHONE">
         </div>
     </div>
 
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">RECIPIENT_ADDRESS</label>
+        <label for="recipientAddress" class="col-sm-2 control-label">RECIPIENT_ADDRESS</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail32" placeholder="RECIPIENT_ADDRESS">
+            <input type="email" class="form-control" id="recipientAddress" placeholder="RECIPIENT_ADDRESS">
         </div>
     </div>
 
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">COURIER_FEE(CNY)</label>
+        <label for="courierFee" class="col-sm-2 control-label">COURIER_FEE(CNY)</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail332" placeholder="COURIER_FEE">
+            <input type="email" class="form-control" id="courierFee" placeholder="COURIER_FEE">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label">ORDER STATUS</label>
         <div class="col-sm-10">
-            <select class="form-control">
+            <select class="form-control" id="status">
                 <option value="1">WAIT_FOR_DELIVERY</option>
                 <option value="2">SHIPPING</option>
                 <option value="3">ARRIVED</option>
@@ -169,15 +105,13 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">DELIVERY PERSON</label>
         <div class="col-sm-10">
-            <select class="form-control">
-                <option>1</option>
-                <option>2</option>
+            <select class="form-control" id="deliveryPerson">
             </select>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">SAVE</button>
+            <div onclick="handleInsertData()" class="btn btn-default">SAVE</div>
         </div>
     </div>
 </form>
@@ -189,5 +123,175 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 
+<script>
+    $(function () {
+        handleLoadPageData(0);
+        handleLoadAdminUser()
+    });
+
+    function handleLoadAdminUser() {
+        $.ajax({
+            url: "http://localhost:8080/api/vi/customers?type=1",//ajax的请求地址
+            type: "get",//请求方式
+            async: true, //是否异步 true为异步,false为同步
+            success: function (data) { //异步成功回调
+                var DOMStr = "";
+                if (data) {
+                    data.map(function (item) {
+                        DOMStr = DOMStr + "<option value='" + item.id + "'>" + item.nickname + "</option>"
+                    });
+                    $('#deliveryPerson').html(DOMStr)
+                }
+            },
+            error: function (msg) { //ajax失败回调
+                alert("ajax发送失败:" + msg);
+            }
+        });
+    }
+
+    function handleLoadPageData(page) {
+        var pageSize = 10
+        $.ajax({
+            url: "http://localhost:8080/api/v1/orders/page?page=" + page + "&size=" + pageSize,//ajax的请求地址
+            type: "get",//请求方式
+            async: true, //是否异步 true为异步,false为同步
+            success: function (data) { //异步成功回调
+                var totalPage = data.totalPages;
+                var content = data.content;
+                resetPageBar(page, totalPage)
+                resetPageList(page, content)
+            },
+            error: function (msg) { //ajax失败回调
+                alert("ajax发送失败:" + msg);
+            }
+        });
+    }
+
+
+    function resetPageBar(current, totalPage) {
+        var pageBarDOM = "";
+        for (var i = 0; i < totalPage; i++) {
+            if (current == i) {
+                pageBarDOM = pageBarDOM + "<li class='active' >" +
+                    "<a onclick='handleLoadPageData(" + i + ")'>" + (i + 1) + "</a>" +
+                    "</li>"
+            } else {
+                pageBarDOM = pageBarDOM + "<li>" +
+                    "<a onclick='handleLoadPageData(" + i + ")'>" + (i + 1) + "</a>" +
+                    "</li>"
+            }
+        }
+        $("#page-bar").html(pageBarDOM)
+    }
+
+    function changeOrderStatus(order) {
+        console.log(order)
+        // TODO MODIFY ORDER STATUS
+    }
+
+    function resetPageList(page, content) {
+        var pageListDOM = "";
+        content.map(function (item) {
+            pageListDOM = pageListDOM + "<tr>\n" +
+                "        <td>" + item.orderId + "</td>\n" +
+                "        <td>" + item.sender + "</td>\n" +
+                "        <td>" + item.deliveryPerson + "</td>\n" +
+                "        <td>" + item.recipient + "</td>\n" +
+                "        <td>" + item.recipientPhone + "</td>\n" +
+                "        <td>" + item.recipientAddress + "</td>\n" +
+                "        <td>\n" +
+                "            <div class=\"dropup\">\n" +
+                "                <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu3\" data-toggle=\"dropdown\"\n" +
+                "                        aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+                (item.orderStatus == 1 ? 'WAIT_FOR_DELIVERY' : item.orderStatus == 2 ? 'SHIPPING' : 'ARRIVED') +
+                "                    <span class=\"caret\"></span>\n" +
+                "                </button>\n" +
+                "                <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu2\">\n" +
+                "                    <li><a onclick='changeOrderStatus( " + JSON.stringify({
+                    page: page,
+                    orderId: item.orderId,
+                    orderStatus: 1
+                }) + " )'>WAIT_FOR_DELIVERY</a></li>\n" +
+                "                    <li><a onclick='changeOrderStatus( " + JSON.stringify({
+                    page: page,
+                    orderId: item.orderId,
+                    orderStatus: 2
+                }) + " )'>SHIPPING</a></li>\n" +
+                "                    <li><a onclick='changeOrderStatus( " + JSON.stringify({
+                    page: page,
+                    orderId: item.orderId,
+                    orderStatus: 3
+                }) + " )'>ARRIVED</a></li>\n" +
+                "                </ul>\n" +
+                "            </div>\n" +
+                "        </td>\n" +
+                "        <td>" + item.courierFee + "</td>\n" +
+                "        <td>" + (item.rate ? item.rate + '✨' : '') + "</td>\n" +
+                "        <td>" + (item.remark ? item.remark : '') + "</td>\n" +
+                "    </tr>"
+        })
+
+        $('#data-list').html(
+            "<caption>ORDER_LIST</caption>   \n" +
+            "    <tr>\n" +
+            "        <th>ORDER_ID</th>\n" +
+            "        <th>SENDER</th>\n" +
+            "        <th>DELIVERY_PERSON</th>\n" +
+            "        <th>RECIPIENT</th>\n" +
+            "        <th>RECIPIENT_PHONE</th>\n" +
+            "        <th>RECIPIENT_ADDRESS</th>\n" +
+            "        <th>ORDER_STATUS</th>\n" +
+            "        <th>COURIER_FEE</th>\n" +
+            "        <th>RATE</th>\n" +
+            "        <th>REMARK</th>\n" +
+            "    </tr>" + pageListDOM
+        )
+    }
+
+    function handleInsertData() {
+        var param = {}
+        param.sender = $('#sender').val();
+        param.recipient = $('#recipient').val();
+        param.recipientPhone = $('#recipientPhone').val();
+        param.recipientAddress = $('#recipientAddress').val();
+        param.courierFee = $('#courierFee').val();
+        param.status = $('#status').val();
+        param.deliveryPerson = $('#deliveryPerson').val();
+        console.log(param)
+
+        for (k in param) {
+            if (!param[k]) {
+                alert('请完善表单字段')
+                return;
+            }
+        }
+
+        $.ajax({
+            url: "http://localhost:8080/api/v1/orders",//ajax的请求地址
+            type: "post",//请求方式
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify(param),
+            async: false, //是否异步 true为异步,false为同步
+            success: function (data) { //异步成功回调
+                console.log(data)
+                clearInsertForm()
+                handleLoadPageData()
+            },
+            error: function (msg) { //ajax失败回调
+                alert("ajax发送失败:" + msg);
+            }
+        });
+    }
+
+    function clearInsertForm() {
+        $('#sender').val('');
+        $('#recipient').val('');
+        $('#recipientPhone').val('');
+        $('#recipientAddress').val('');
+        $('#courierFee').val('');
+        $('#status').val('');
+        $('#deliveryPerson').val('');
+    }
+</script>
 </body>
 </html>

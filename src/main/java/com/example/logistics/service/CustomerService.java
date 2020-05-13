@@ -20,7 +20,7 @@ public class CustomerService {
         return customerDao.updateById(customer);
     }
 
-    public List<Customer> selectCustomers() {
-        return customerDao.selectCustomers();
+    public List<Customer> selectCustomers(Integer type) {
+        return customerDao.selectCustomers(type);
     }
 }

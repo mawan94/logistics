@@ -11,20 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController {
 
     @RequestMapping("/home")
-    public String hello(Model m) {
-        m.addAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
+    public String home(Model m) {
         return "home";
     }
 
     @RequestMapping("/user-index")
     public String userIndex(Model m) {
-        m.addAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
         return "user-index";
     }
 
     @RequestMapping("/user-edit")
     public String userEdit(Model m) {
-        m.addAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
         return "user-edit";
+    }
+
+    @RequestMapping("/login")
+    public String login(Model m) {
+        return "login";  //视图重定向hello.jsp
     }
 }

@@ -25,7 +25,7 @@ public class CustomerController {
     }
 
     @GetMapping("/api/vi/customers")
-    public ResponseEntity<List<Customer>> selectCustomers() {
-        return ResponseEntity.ok(customerService.selectCustomers());
+    public ResponseEntity<List<Customer>> selectCustomers(@RequestParam("type") Integer type) {
+        return ResponseEntity.ok(customerService.selectCustomers(type));
     }
 }
