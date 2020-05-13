@@ -25,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping("/api/v1/orders/{id}")
-    public ResponseEntity<Boolean> updateById(@PathVariable String id, OrderDTO orderDTO) {
+    public ResponseEntity<Boolean> updateById(@PathVariable String id, @RequestBody OrderDTO orderDTO) {
         orderDTO.setOrderId(id);
         return ResponseEntity.ok(orderService.updateById(orderDTO));
     }
