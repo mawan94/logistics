@@ -138,7 +138,8 @@
                 var DOMStr = "";
                 if (data) {
                     data.map(function (item) {
-                        DOMStr = DOMStr + "<option value='" + item.id + "'>" + item.nickname + "</option>"
+                        // DOMStr = DOMStr + "<option value='" + item.id + "'>" + item.nickname + "</option>"
+                        DOMStr = DOMStr + "<option value='" + item.nickname + "'>" + item.nickname + "</option>"
                     });
                     $('#deliveryPerson').html(DOMStr)
                 }
