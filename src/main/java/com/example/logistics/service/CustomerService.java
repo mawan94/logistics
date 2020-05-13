@@ -3,15 +3,16 @@ package com.example.logistics.service;
 import com.example.logistics.dao.CustomerDao;
 import com.example.logistics.domain.Customer;
 import com.example.logistics.dto.LoginDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerService {
-    @Resource
-    CustomerDao customerDao;
+    private final CustomerDao customerDao;
 
     public Boolean insert(Customer customer) {
         return customerDao.insert(customer);
