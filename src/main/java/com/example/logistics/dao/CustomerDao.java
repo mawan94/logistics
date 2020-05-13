@@ -24,16 +24,16 @@ public class CustomerDao {
     public Customer updateById(Customer customer) {
         StringBuilder sql = new StringBuilder("UPDATE customer SET ");
         if (customer.getAccount() != null) {
-            sql.append(" account = ").append(customer.getAccount()).append(",");
+            sql.append(" account = ").append("'").append(customer.getAccount()).append("'").append(",");
         }
         if (customer.getEmail() != null) {
-            sql.append(" email = ").append(customer.getEmail()).append(",");
+            sql.append(" email = ").append("'").append(customer.getEmail()).append("'").append(",");
         }
         if (customer.getNickname() != null) {
-            sql.append(" nickname = ").append(customer.getNickname()).append(",");
+            sql.append(" nickname = ").append("'").append(customer.getNickname()).append("'").append(",");
         }
         if (customer.getPwd() != null) {
-            sql.append(" pwd = ").append(customer.getPwd()).append(",");
+            sql.append(" pwd = ").append("'").append(customer.getPwd()).append("'").append(",");
         }
         if (customer.getType() != null) {
             sql.append(" type = ").append(customer.getType()).append(",");
