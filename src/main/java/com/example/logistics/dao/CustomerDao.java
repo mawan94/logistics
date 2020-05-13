@@ -1,20 +1,14 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.domain.Customer;
-import com.example.logistics.dto.OrderDTO;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.sql.Statement;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class CustomerDao {
@@ -28,8 +22,27 @@ public class CustomerDao {
     }
 
     public Customer updateById(Customer customer) {
-        namedParameterJdbcTemplate.update("UPDATE customer " +
-                "SET nickname=:nickname, account=:account, pwd=:pwd, email=:email, type=:type WHERE id=:id", new BeanPropertySqlParameterSource(customer));
+        StringBuilder sql = new StringBuilder("UPDATE customer SET ");
+        if (customer.getAccount() != null) {
+            sql.append(" account = ").append(customer.getAccount());
+        }
+        if (customer.getEmail() != null) {
+            sql.append(" email = ").append(customer.getEmail());
+        }
+        if (customer.getNickname() != null) {
+            sql.append(" nickname = ").append(customer.getNickname());
+        }
+        if (customer.getPwd() != null) {
+            sql.append(" pwd = ").append(customer.getPwd());
+        }
+        if (customer.getType() != null) {
+            sql.append(" type = ").append(customer.getType());
+        }
+        if (customer.getId() != null) {
+            sql.append("WHERE id = ").append(customer.getId());
+        }
+
+        namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap());
         return customer;
     }
 

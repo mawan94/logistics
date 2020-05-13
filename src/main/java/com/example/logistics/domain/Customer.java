@@ -9,5 +9,5 @@ public class Customer {
     private String account;
     private String pwd;
     private String email;
-    private int type;
+    private Integer type;
 }
