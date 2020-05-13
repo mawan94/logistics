@@ -20,4 +20,8 @@ public class OrderService {
     public Boolean insert(OrderBO bo) {
         return orderDao.insert(bo);
     }
+
+    public Boolean updateById(OrderDTO orderDTO) {
+        return orderDao.updateById(orderDTO);
+    }
 }

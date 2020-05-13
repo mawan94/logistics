@@ -6,12 +6,8 @@ import com.example.logistics.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,5 +22,11 @@ public class OrderController {
     @PostMapping("/api/v1/orders")
     public ResponseEntity<Boolean> insert(@RequestBody OrderBO bo) {
         return ResponseEntity.ok(orderService.insert(bo));
+    }
+
+    @PostMapping("/api/v1/orders/{id}")
+    public ResponseEntity<Boolean> updateById(@PathVariable String id, OrderDTO orderDTO) {
+        orderDTO.setOrderId(id);
+        return ResponseEntity.ok(orderService.updateById(orderDTO));
     }
 }

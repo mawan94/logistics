@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -62,6 +63,39 @@ public class OrderDao {
         sql.append("'").append(bo.getCourierFee()).append("'").append(", ");
         sql.append("'").append(bo.getSender()).append("'").append(", ");
         sql.append("'").append(bo.getDeliveryPerson()).append("'").append(")");
+        return namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap()) >= 1;
+    }
+
+    public Boolean updateById(OrderDTO o) {
+        StringBuilder sql = new StringBuilder("UPDATE `order` SET ");
+        if (!StringUtils.isEmpty(o.getOrderStatus())) {
+            sql.append(" status = ").append(o.getOrderStatus()).append(",");
+        }
+        if (!StringUtils.isEmpty(o.getDeliveryPerson())) {
+            sql.append(" delivery_person = ").append("'").append(o.getDeliveryPerson()).append("'").append(",");
+        }
+        if (!StringUtils.isEmpty(o.getRecipient())) {
+            sql.append(" recipient = ").append("'").append(o.getRecipient()).append("'").append(",");
+        }
+        if (!StringUtils.isEmpty(o.getRecipientAddress())) {
+            sql.append(" recipient_address = ").append("'").append(o.getRecipientAddress()).append("'").append(",");
+        }
+        if (!StringUtils.isEmpty(o.getRecipientPhone())) {
+            sql.append(" recipient_phone = ").append("'").append(o.getRecipientPhone()).append("'").append(",");
+        }
+        if (!StringUtils.isEmpty(o.getCourierFee())) {
+            sql.append(" courier_fee = ").append("'").append(o.getCourierFee()).append("'").append(",");
+        }
+        if (!StringUtils.isEmpty(o.getSender())) {
+            sql.append(" sender = ").append("'").append(o.getSender()).append("'").append(",");
+        }
+
+        if (sql.lastIndexOf(",") == sql.length() - 1) {
+            sql.setLength(sql.length() - 1);
+        }
+
+        sql.append(" WHERE id = ").append(o.getOrderId());
+
         return namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap()) >= 1;
     }
 }
