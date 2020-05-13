@@ -185,9 +185,23 @@
         $("#page-bar").html(pageBarDOM)
     }
 
-    function changeOrderStatus(order) {
-        console.log(order)
+    function changeOrderStatus(param) {
+        console.log(param)
         // TODO MODIFY ORDER STATUS
+        $.ajax({
+            url: "http://localhost:8080/api/v1/orders/"+ param.orderId,//ajax的请求地址
+            type: "post",//请求方式
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify(param),
+            async: false, //是否异步 true为异步,false为同步
+            success: function (data) { //异步成功回调
+
+                handleLoadPageData(param.page)
+            },
+            error: function (msg) { //ajax失败回调
+                alert("ajax发送失败:" + msg);
+            }
+        });
     }
 
     function resetPageList(page, content) {
