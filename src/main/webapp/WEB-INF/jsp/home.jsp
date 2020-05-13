@@ -32,7 +32,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/user-index" >USER</a></li>
+                <li><a href="/user-index">USER</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div>
@@ -119,12 +119,33 @@
 </div>
 
 <form class="form-horizontal">
-    <%--<div class="form-group">--%>
-    <%--<label for="inputEmail3" class="col-sm-2 control-label">Email</label>--%>
-    <%--<div class="col-sm-10">--%>
-    <%--<input type="email" class="form-control" id="inputEmail3" placeholder="Email">--%>
-    <%--</div>--%>
-    <%--</div>--%>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">RECIPIENT</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">RECIPIENT_PHONE</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail31" placeholder="Email">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">RECIPIENT_ADDRESS</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail32" placeholder="Email">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">COURIER_FEE</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail332" placeholder="Email">
+        </div>
+    </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label">ORDER STATUS</label>
