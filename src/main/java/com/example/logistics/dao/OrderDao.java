@@ -31,7 +31,9 @@ public class OrderDao {
             "       o.recipient ," +
             "       o.recipient_address ," +
             "       o.recipient_phone ," +
-            "       o.courier_fee " +
+            "       o.courier_fee ," +
+            "       o.sender ," +
+            "       o.delivery_person " +
             "from `order` o " +
             "         left join customer c on o.customer_id = c.id" +
             "         left join feedback f on c.id = f.customer_id" +

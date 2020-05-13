@@ -18,4 +18,5 @@ public class OrderDTO {
     private String recipientAddress;
     private String recipientPhone;
     private String courierFee;
+    private String sender;
 }
