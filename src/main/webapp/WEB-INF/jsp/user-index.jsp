@@ -38,7 +38,7 @@
 </nav>
 
 
-<table class="table table-striped">
+<table id="user-table" class="table table-striped">
     <caption>ORDER_LIST</caption>  <!--标题标签，居中显示，仅有一个标题-->
     <tr>
         <th>ID</th>
@@ -48,40 +48,8 @@
         <th>CUSTOMER_TYPE</th>
         <th>ACTION</th>
     </tr>
-    <tr>
-        <td>12345</td>  <!--td标签：普通表格，内容左对齐-->
-        <td>2333</td>
-        <td>sdjhbgns</td>
-        <td>5153@qq.com</td>
-        <td>CUSTOMER</td>
-        <td>
-            <button onclick="window.location = '/user-edit'" type="button" class="btn btn-default">EDIT</button>
-        </td>
 
-    </tr>
 </table>
-
-<%--<div style="display: flex;align-items: center;justify-content: center;width: 100%">--%>
-    <%--<nav aria-label="Page navigation">--%>
-        <%--<ul class="pagination">--%>
-            <%--<li>--%>
-                <%--<a href="#" aria-label="Previous">--%>
-                    <%--<span aria-hidden="true">&laquo;</span>--%>
-                <%--</a>--%>
-            <%--</li>--%>
-            <%--<li><a href="#">1</a></li>--%>
-            <%--<li><a href="#">2</a></li>--%>
-            <%--<li><a href="#">3</a></li>--%>
-            <%--<li><a href="#">4</a></li>--%>
-            <%--<li><a href="#">5</a></li>--%>
-            <%--<li>--%>
-                <%--<a href="#" aria-label="Next">--%>
-                    <%--<span aria-hidden="true">&raquo;</span>--%>
-                <%--</a>--%>
-            <%--</li>--%>
-        <%--</ul>--%>
-    <%--</nav>--%>
-<%--</div>--%>
 
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
@@ -89,6 +57,57 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 
+<script>
+
+    $(function () {
+        <%-- LOAD DATA LIST --%>
+        $.ajax({
+            url: "http://localhost:8080/api/vi/customers",//ajax的请求地址
+            type: "get",//请求方式
+            async: true, //是否异步 true为异步,false为同步
+            success: function (data) { //异步成功回调
+                var DOMStr = "";
+                if (data && data.length) {
+                    data.map(function (item) {
+                        var itemDOMStr =
+                            "<tr><td>" + item.id + "</td>" +
+                            "<td>" + item.nickname + "</td>" +
+                            "<td>" + item.account + "</td>" +
+                            "<td>" + item.email + "</td>" +
+                            "<td>" + (item.type == 1 ? 'ADMIN' : 'CUSTOMER') + "</td>" +
+                            "<td>" +
+                            "<button onclick='handle2Detail(" + JSON.stringify(item) + ")'  type='button' class='btn btn-default'>EDIT</button>" +
+                            "</td></tr>";
+                        DOMStr = DOMStr + itemDOMStr;
+                    })
+                }
+                if (DOMStr) {
+                    document.getElementById('user-table').innerHTML =
+                        "<caption>ORDER_LIST</caption>  \n" +
+                        "    <tr>\n" +
+                        "        <th>ID</th>\n" +
+                        "        <th>NICKNAME</th>\n" +
+                        "        <th>ACCOUNT</th>\n" +
+                        "        <th>EMAIL</th>\n" +
+                        "        <th>CUSTOMER_TYPE</th>\n" +
+                        "        <th>ACTION</th>\n" +
+                        "    </tr>"
+                        + DOMStr
+                }
+            },
+            error: function (msg) { //ajax失败回调
+                alert("ajax发送失败:" + msg);
+            }
+        });
+
+    });
+
+    function handle2Detail(item) {
+        console.log(item)
+        window.location = '/user-edit?id=' + item.id + "&nickname=" + item.nickname + "&email=" + item.email
+    }
+
+</script>
 
 </body>
 </html>

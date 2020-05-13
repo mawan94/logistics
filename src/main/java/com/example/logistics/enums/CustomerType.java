@@ -1,9 +1,9 @@
 package com.example.logistics.enums;
 
 public enum CustomerType {
-    ADMIN(1), DELIVERER(2), CUSTOMER(3);
+    ADMIN(1), CUSTOMER(2);
 
-    /*1 管理人员 2 送货人员 3 客户*/
+    /*1 管理人员 2 客户*/
     private final int code;
 
     CustomerType(int code) {

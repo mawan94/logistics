@@ -21,31 +21,24 @@
 </ol>
 
 <form class="form-horizontal">
+
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">NICKNAME</label>
+        <label for="nickname" class="col-sm-2 control-label">NICKNAME</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="NICKNAME">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputEmail5" class="col-sm-2 control-label">ACCOUNT</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail5" placeholder="ACCOUNT">
+            <input type="text" class="form-control" id="nickname" placeholder="NICKNAME">
         </div>
     </div>
 
     <div class="form-group">
-        <label for="inputEmail5" class="col-sm-2 control-label">EMAIL</label>
+        <label for="email" class="col-sm-2 control-label">EMAIL</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail25" placeholder="EMAIL">
+            <input type="text" class="form-control" id="email" placeholder="EMAIL">
         </div>
     </div>
-
-
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">EDIT</button>
+            <div onclick="handleEdit()" class="btn btn-default">EDIT</div>
         </div>
     </div>
 </form>
@@ -56,5 +49,47 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+
+<script>
+    $(function () {
+        // INIT PARAM
+        $("#nickname").val(getQueryVariable('nickname'))
+        $("#email").val(getQueryVariable('email'))
+    });
+
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
+
+    function handleEdit() {
+        var param = {}
+        param.id = getQueryVariable('id')
+        param.nickname = $("#nickname").val()
+        param.email = $("#email").val()
+        $.ajax({
+            url: "http://localhost:8080/api/vi/customers/" + param.id,//ajax的请求地址
+            type: "post",//请求方式
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify(param),
+            async: false, //是否异步 true为异步,false为同步
+            success: function (data) { //异步成功回调
+                console.log(data)
+            },
+            error: function (msg) { //ajax失败回调
+                alert("ajax发送失败:" + msg);
+            }
+        });
+    }
+
+</script>
+
 </body>
 </html>
