@@ -22,7 +22,7 @@ public class OrderDao {
     private static final String SQL = "select o.id       as orderId," +
             "       c.nickname as customerName," +
             "       c.email    as customerEmail," +
-            "       s.account  as deliveryPerson," +
+            "       s.account  as account," +
             "       o.status   as orderStatus," +
             "       f.rate," +
             "       f.remark ," +
