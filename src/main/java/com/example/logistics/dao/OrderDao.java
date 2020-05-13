@@ -36,16 +36,16 @@ public class OrderDao {
             "       o.sender ," +
             "       o.delivery_person " +
             "from `order` o " +
-            "         left join customer c on o.customer_id = c.id" +
-            "         left join feedback f on c.id = f.customer_id" +
-            "         left join staff s on f.staff_id = s.id" +
+            "         left join customer c on o.id = c.id" +
+            "         left join feedback f on o.id = f.order_id" +
+            "         left join staff s on f.id = s.id" +
             " order by o.id desc";
 
     private static final String COUNT_SQL = "select count(1)" +
             "from `order` o" +
-            "         left join customer c on o.customer_id = c.id" +
-            "         left join feedback f on c.id = f.customer_id" +
-            "         left join staff s on f.staff_id = s.id";
+            "         left join customer c on o.id = c.id" +
+            "         left join feedback f on o.id = f.order_id" +
+            "         left join staff s on f.id = s.id";
 
     public Page<OrderDTO> page(Pageable pageable) {
         List<OrderDTO> data = namedParameterJdbcTemplate.query(SQL + " limit :offset, :pageSize", new BeanPropertySqlParameterSource(pageable),
