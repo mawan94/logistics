@@ -22,4 +22,10 @@ public class CustomerDao {
                 "VALUES(:nickname, :account, :pwd, :email, :type)", new BeanPropertySqlParameterSource(customer));
         return update >= 1;
     }
+
+    public Customer updateById(Customer customer) {
+        namedParameterJdbcTemplate.update("UPDATE customer " +
+                "SET nickname=:nickname, account=:account, pwd=:pwd, email=:email, type=:type WHERE id=:id", new BeanPropertySqlParameterSource(customer));
+        return customer;
+    }
 }

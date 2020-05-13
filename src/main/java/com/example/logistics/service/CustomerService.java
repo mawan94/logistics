@@ -14,4 +14,8 @@ public class CustomerService {
     public Boolean insert(Customer customer) {
         return customerDao.insert(customer);
     }
+
+    public Customer updateById(Customer customer) {
+        return customerDao.updateById(customer);
+    }
 }
