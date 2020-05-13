@@ -22,7 +22,7 @@ public class PageController {
         return "user-edit";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = {"/", "/login"})
     public String login(Model m) {
         return "login";  //视图重定向hello.jsp
     }
