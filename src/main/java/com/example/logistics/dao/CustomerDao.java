@@ -24,22 +24,27 @@ public class CustomerDao {
     public Customer updateById(Customer customer) {
         StringBuilder sql = new StringBuilder("UPDATE customer SET ");
         if (customer.getAccount() != null) {
-            sql.append(" account = ").append(customer.getAccount());
+            sql.append(" account = ").append(customer.getAccount()).append(",");
         }
         if (customer.getEmail() != null) {
-            sql.append(" email = ").append(customer.getEmail());
+            sql.append(" email = ").append(customer.getEmail()).append(",");
         }
         if (customer.getNickname() != null) {
-            sql.append(" nickname = ").append(customer.getNickname());
+            sql.append(" nickname = ").append(customer.getNickname()).append(",");
         }
         if (customer.getPwd() != null) {
-            sql.append(" pwd = ").append(customer.getPwd());
+            sql.append(" pwd = ").append(customer.getPwd()).append(",");
         }
         if (customer.getType() != null) {
-            sql.append(" type = ").append(customer.getType());
+            sql.append(" type = ").append(customer.getType()).append(",");
         }
+
+        if (sql.lastIndexOf(",") == sql.length() - 1) {
+            sql.setLength(sql.length() - 1);
+        }
+
         if (customer.getId() != null) {
-            sql.append("WHERE id = ").append(customer.getId());
+            sql.append(" WHERE id = ").append(customer.getId());
         }
 
         namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap());
