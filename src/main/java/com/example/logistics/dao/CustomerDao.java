@@ -1,6 +1,7 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.domain.Customer;
+import com.example.logistics.dto.LoginDTO;
 import com.example.logistics.enums.CustomerType;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -61,5 +62,13 @@ public class CustomerDao {
         }
         return namedParameterJdbcTemplate.query(sql, Collections.emptyMap(),
                 new BeanPropertyRowMapper<>(Customer.class));
+    }
+
+    public Boolean login(LoginDTO loginDTO) {
+        Integer cnt = namedParameterJdbcTemplate.queryForObject(
+                String.format("SELECT COUNT(*) FROM customer WHERE account = '%s' AND pwd = '%s'",
+                        loginDTO.getAccount(), loginDTO.getPwd()), Collections.emptyMap(),
+                Integer.class);
+        return cnt == 1;
     }
 }
