@@ -52,7 +52,7 @@ public class OrderDao {
     }
 
     public Boolean insert(OrderBO bo) {
-        StringBuilder sql = new StringBuilder("INSERT INTO 'order'(status, recipient, recipient_address, recipient_phone, courier_fee, sender, delivery_person) VALUES(");
+        StringBuilder sql = new StringBuilder("INSERT INTO `order` (customer_id, staff_id, status, recipient, recipient_address, recipient_phone, courier_fee, sender, delivery_person) VALUES ('2', '2',");
         sql.append(bo.getStatus()).append(", ");
         sql.append("'").append(bo.getRecipient()).append("'").append(", ");
         sql.append("'").append(bo.getRecipientAddress()).append("'").append(", ");
