@@ -1,7 +1,5 @@
 package com.example.logistics.dao;
 
-import com.example.logistics.domain.Customer;
-import com.example.logistics.domain.Order;
 import com.example.logistics.dto.OrderBO;
 import com.example.logistics.dto.OrderDTO;
 import lombok.RequiredArgsConstructor;
