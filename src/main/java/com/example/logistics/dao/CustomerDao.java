@@ -22,8 +22,27 @@ public class CustomerDao {
     }
 
     public Customer updateById(Customer customer) {
-        namedParameterJdbcTemplate.update("UPDATE customer " +
-                "SET nickname=:nickname, email=:email WHERE id=:id", new BeanPropertySqlParameterSource(customer));
+        StringBuilder sql = new StringBuilder("UPDATE customer SET ");
+        if (customer.getAccount() != null) {
+            sql.append(" account = ").append(customer.getAccount());
+        }
+        if (customer.getEmail() != null) {
+            sql.append(" email = ").append(customer.getEmail());
+        }
+        if (customer.getNickname() != null) {
+            sql.append(" nickname = ").append(customer.getNickname());
+        }
+        if (customer.getPwd() != null) {
+            sql.append(" pwd = ").append(customer.getPwd());
+        }
+        if (customer.getType() != null) {
+            sql.append(" type = ").append(customer.getType());
+        }
+        if (customer.getId() != null) {
+            sql.append("WHERE id = ").append(customer.getId());
+        }
+
+        namedParameterJdbcTemplate.update(sql.toString(), new BeanPropertySqlParameterSource(customer));
         return customer;
     }
 

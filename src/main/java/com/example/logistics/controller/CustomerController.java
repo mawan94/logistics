@@ -18,8 +18,9 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.insert(customer));
     }
 
-    @PostMapping("/api/vi/customers/{customerId}")
-    public ResponseEntity<Customer> updateById(@PathVariable String customerId, @RequestBody Customer customer) {
+    @PostMapping("/api/vi/customers/{id}")
+    public ResponseEntity<Customer> updateById(@PathVariable Integer id, @RequestBody Customer customer) {
+        customer.setId(id);
         return ResponseEntity.ok(customerService.updateById(customer));
     }
 
