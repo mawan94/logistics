@@ -261,6 +261,7 @@
 
         for (k in param) {
             if (!param[k]) {
+                alert('请完善表单字段')
                 return;
             }
         }

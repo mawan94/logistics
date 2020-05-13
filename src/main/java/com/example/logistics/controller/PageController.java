@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController {
 
     @RequestMapping("/home")
-    public String hello(Model m) {
+    public String home(Model m) {
         return "home";
     }
 
@@ -23,5 +23,10 @@ public class PageController {
     @RequestMapping("/user-edit")
     public String userEdit(Model m) {
         return "user-edit";
+    }
+
+    @RequestMapping("/login")
+    public String login(Model m) {
+        return "login";  //视图重定向hello.jsp
     }
 }
