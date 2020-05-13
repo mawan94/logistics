@@ -119,31 +119,39 @@
 </div>
 
 <form class="form-horizontal">
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">SENDER</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail113" placeholder="SENDER">
+        </div>
+    </div>
+
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">RECIPIENT</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            <input type="email" class="form-control" id="inputEmail3" placeholder="RECIPIENT">
         </div>
     </div>
 
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">RECIPIENT_PHONE</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail31" placeholder="Email">
+            <input type="email" class="form-control" id="inputEmail31" placeholder="RECIPIENT_PHONE">
         </div>
     </div>
 
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">RECIPIENT_ADDRESS</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail32" placeholder="Email">
+            <input type="email" class="form-control" id="inputEmail32" placeholder="RECIPIENT_ADDRESS">
         </div>
     </div>
 
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">COURIER_FEE</label>
+        <label for="inputEmail3" class="col-sm-2 control-label">COURIER_FEE(CNY)</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail332" placeholder="Email">
+            <input type="email" class="form-control" id="inputEmail332" placeholder="COURIER_FEE">
         </div>
     </div>
 
@@ -151,23 +159,13 @@
         <label class="col-sm-2 control-label">ORDER STATUS</label>
         <div class="col-sm-10">
             <select class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+                <option value="1">WAIT_FOR_DELIVERY</option>
+                <option value="2">SHIPPING</option>
+                <option value="3">ARRIVED</option>
             </select>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">CUSTOMER</label>
-        <div class="col-sm-10">
-            <select class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-            </select>
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-sm-2 control-label">DELIVERY PERSON</label>
         <div class="col-sm-10">
