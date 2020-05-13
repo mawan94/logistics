@@ -8,8 +8,10 @@ public class Order {
     private String recipient;// 收件人名称
     private String customerId;
     private String staffId;
-    private int status;
+    private Integer status;
     private String recipientAddress;
     private String recipientPhone;
     private String courierFee;
+    private String sender;
+    private String deliveryPerson;
 }

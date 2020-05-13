@@ -1,5 +1,6 @@
 package com.example.logistics.dao;
 
+import com.example.logistics.dto.OrderBO;
 import com.example.logistics.dto.OrderDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -48,5 +49,17 @@ public class OrderDao {
                 new BeanPropertyRowMapper<>(OrderDTO.class));
         long total = namedParameterJdbcTemplate.queryForObject(COUNT_SQL, Collections.emptyMap(), Long.class);
         return new PageImpl<>(data, pageable, total);
+    }
+
+    public Boolean insert(OrderBO bo) {
+        StringBuilder sql = new StringBuilder("INSERT INTO order(status, recipient, recipient_address, recipient_phone, courier_fee, sender, delivery_person) VALUES(");
+        sql.append(bo.getStatus()).append(", ");
+        sql.append("'").append(bo.getRecipient()).append("'").append(", ");
+        sql.append("'").append(bo.getRecipientAddress()).append("'").append(", ");
+        sql.append("'").append(bo.getRecipientPhone()).append("'").append(", ");
+        sql.append("'").append(bo.getCourierFee()).append("'").append(", ");
+        sql.append("'").append(bo.getSender()).append("'").append(", ");
+        sql.append("'").append(bo.getDeliveryPerson()).append("'").append(")");
+        return namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap()) >= 1;
     }
 }

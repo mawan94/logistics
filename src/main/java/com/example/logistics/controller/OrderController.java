@@ -6,6 +6,7 @@ import com.example.logistics.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,6 @@ public class OrderController {
 
     @PostMapping("/api/v1/orders")
     public ResponseEntity<Boolean> insert(@RequestBody OrderBO bo) {
-        return null;
+        return ResponseEntity.ok(orderService.insert(bo));
     }
 }
