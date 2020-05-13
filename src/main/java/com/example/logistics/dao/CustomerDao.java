@@ -42,7 +42,7 @@ public class CustomerDao {
             sql.append("WHERE id = ").append(customer.getId());
         }
 
-        namedParameterJdbcTemplate.update(sql.toString(), new BeanPropertySqlParameterSource(customer));
+        namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap());
         return customer;
     }
 
