@@ -24,7 +24,7 @@
             <span>Password</span>
             <input id="pwd" type="password"/>
         </label>
-        <button id="login" onclick="handleLogin()"  type="button" class="submit">Sign in</button>
+        <button id="login" onclick="handleLogin()" type="button" class="submit">Sign in</button>
     </div>
 
 
@@ -76,23 +76,30 @@
     });
 
     function handleLogin() {
-        var account = $("#account").val();
-        var pwd = $("#pwd").val();
-        if (account && pwd) {
+        var param = {}
 
-            <%--$.ajax({--%>
-                <%--url: "${pageContext.request.contextPath}/staff-login",//ajax的请求地址--%>
-                <%--type: "post",//请求方式--%>
-                <%--dataType: "json",//返回数据为json--%>
-                <%--data: $("#form").serialize(), //$("#loginForm").serialize() 序列化--%>
-                <%--async: true, //是否异步 true为异步,false为同步--%>
-                <%--success: function (data) { //异步成功回调--%>
-                    <%--console.log(data);--%>
-                <%--},--%>
-                <%--error: function (msg) { //ajax失败回调--%>
-                    <%--alert("ajax发送失败:" + msg);--%>
-                <%--}--%>
-            <%--});--%>
+        param.account = $("#account").val();
+        param.pwd = $("#pwd").val();
+        if (param.account && param.pwd) {
+
+
+            $.ajax({
+                url: "http://localhost:8080/api/vi/customers/login",//ajax的请求地址
+                type: "post",//请求方式
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(param),
+                async: false, //是否异步 true为异步,false为同步
+                success: function (data) { //异步成功回调
+                    if (data) {
+                        window.location = '/home'
+                    } else {
+                        alert('用户名/密码错误')
+                    }
+                },
+                error: function (msg) { //ajax失败回调
+                    alert("ajax发送失败:" + msg);
+                }
+            });
         }
     }
 

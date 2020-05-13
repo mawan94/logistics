@@ -29,4 +29,9 @@ public class PageController {
     public String login(Model m) {
         return "login";  //视图重定向hello.jsp
     }
+
+    @RequestMapping("/customer-home")
+    public String customerHome(Model m) {
+        return "customer-home";  //视图重定向hello.jsp
+    }
 }
