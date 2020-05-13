@@ -4,10 +4,9 @@ import com.example.logistics.domain.Customer;
 import com.example.logistics.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,5 +21,10 @@ public class CustomerController {
     @PostMapping("/api/vi/customers/{customerId}")
     public ResponseEntity<Customer> updateById(@PathVariable String customerId, @RequestBody Customer customer) {
         return ResponseEntity.ok(customerService.updateById(customer));
+    }
+
+    @GetMapping("/api/vi/customers")
+    public ResponseEntity<List<Customer>> selectCustomers() {
+        return ResponseEntity.ok(customerService.selectCustomers());
     }
 }

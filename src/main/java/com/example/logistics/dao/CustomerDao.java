@@ -1,6 +1,8 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.domain.Customer;
+import com.example.logistics.dto.OrderDTO;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.sql.Statement;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -27,5 +31,10 @@ public class CustomerDao {
         namedParameterJdbcTemplate.update("UPDATE customer " +
                 "SET nickname=:nickname, account=:account, pwd=:pwd, email=:email, type=:type WHERE id=:id", new BeanPropertySqlParameterSource(customer));
         return customer;
+    }
+
+    public List<Customer> selectCustomers() {
+        return namedParameterJdbcTemplate.query("SELECT * FROM customer", Collections.emptyMap(),
+                new BeanPropertyRowMapper<>(Customer.class));
     }
 }
