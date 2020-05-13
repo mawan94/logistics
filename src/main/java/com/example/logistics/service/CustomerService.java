@@ -5,6 +5,7 @@ import com.example.logistics.domain.Customer;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -13,5 +14,13 @@ public class CustomerService {
 
     public Boolean insert(Customer customer) {
         return customerDao.insert(customer);
+    }
+
+    public Customer updateById(Customer customer) {
+        return customerDao.updateById(customer);
+    }
+
+    public List<Customer> selectCustomers() {
+        return customerDao.selectCustomers();
     }
 }
