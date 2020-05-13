@@ -66,7 +66,7 @@ public class OrderDao {
 
         String lastOrderId = namedParameterJdbcTemplate.queryForObject("SELECT id FROM `order` ORDER BY id DESC LIMIT 1", Collections.emptyMap(), String.class);
 
-        int feedback = namedParameterJdbcTemplate.update(String.format("INSERT INTO feedback(order_id) VALUES('%s')", lastOrderId), Collections.emptyMap());
+        int feedback = namedParameterJdbcTemplate.update(String.format("INSERT INTO feedback(order_id, rate) VALUES('%s', 5)", lastOrderId), Collections.emptyMap());
 
         return namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap()) >= 1 && feedback >= 1;
     }
