@@ -1,6 +1,7 @@
 package com.example.logistics.dao;
 
 import com.example.logistics.domain.Customer;
+import com.example.logistics.enums.CustomerType;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -51,8 +52,14 @@ public class CustomerDao {
         return customer;
     }
 
-    public List<Customer> selectCustomers() {
-        return namedParameterJdbcTemplate.query("SELECT * FROM customer", Collections.emptyMap(),
+    public List<Customer> selectCustomers(Integer type) {
+        String sql = "SELECT * FROM customer ";
+        if (type == CustomerType.ADMIN.getCode()) {
+            sql = sql + " WHERE type = " + type;
+        } else if (type == CustomerType.CUSTOMER.getCode()) {
+            sql = sql + " WHERE type = " + type;
+        }
+        return namedParameterJdbcTemplate.query(sql, Collections.emptyMap(),
                 new BeanPropertyRowMapper<>(Customer.class));
     }
 }

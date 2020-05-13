@@ -62,7 +62,7 @@
     $(function () {
         <%-- LOAD DATA LIST --%>
         $.ajax({
-            url: "http://localhost:8080/api/vi/customers",//ajax的请求地址
+            url: "http://localhost:8080/api/vi/customers?type=0",//ajax的请求地址
             type: "get",//请求方式
             async: true, //是否异步 true为异步,false为同步
             success: function (data) { //异步成功回调
@@ -103,7 +103,6 @@
     });
 
     function handle2Detail(item) {
-        console.log(item)
         window.location = '/user-edit?id=' + item.id + "&nickname=" + item.nickname + "&email=" + item.email
     }
 

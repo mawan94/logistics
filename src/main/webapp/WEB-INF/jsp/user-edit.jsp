@@ -81,7 +81,7 @@
             data: JSON.stringify(param),
             async: false, //是否异步 true为异步,false为同步
             success: function (data) { //异步成功回调
-                console.log(data)
+                window.location = '/user-index'
             },
             error: function (msg) { //ajax失败回调
                 alert("ajax发送失败:" + msg);
