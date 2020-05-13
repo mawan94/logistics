@@ -24,4 +24,8 @@ public class OrderService {
     public Boolean updateById(OrderDTO orderDTO) {
         return orderDao.updateById(orderDTO);
     }
+
+    public OrderDTO selectById(String id) {
+        return orderDao.selectById(id);
+    }
 }

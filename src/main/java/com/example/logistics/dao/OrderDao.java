@@ -1,5 +1,7 @@
 package com.example.logistics.dao;
 
+import com.example.logistics.domain.Customer;
+import com.example.logistics.domain.Order;
 import com.example.logistics.dto.OrderBO;
 import com.example.logistics.dto.OrderDTO;
 import lombok.RequiredArgsConstructor;
@@ -63,7 +65,12 @@ public class OrderDao {
         sql.append("'").append(bo.getCourierFee()).append("'").append(", ");
         sql.append("'").append(bo.getSender()).append("'").append(", ");
         sql.append("'").append(bo.getDeliveryPerson()).append("'").append(")");
-        return namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap()) >= 1;
+
+        String lastOrderId = namedParameterJdbcTemplate.queryForObject("SELECT id FROM `order` ORDER BY id DESC LIMIT 1", Collections.emptyMap(), String.class);
+
+        int feedback = namedParameterJdbcTemplate.update(String.format("INSERT INTO feedback(order_id) VALUES('%s')", lastOrderId), Collections.emptyMap());
+
+        return namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap()) >= 1 && feedback >= 1;
     }
 
     public Boolean updateById(OrderDTO o) {
@@ -97,5 +104,10 @@ public class OrderDao {
         sql.append(" WHERE id = ").append(o.getOrderId());
 
         return namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap()) >= 1;
+    }
+
+    public OrderDTO selectById(String id) {
+        return namedParameterJdbcTemplate.queryForObject("SELECT o.*, f.*, o.id AS orderId FROM `order` o LEFT JOIN feedback f on f.staff_id = o.id WHERE o.id = " + id,
+                Collections.emptyMap(), new BeanPropertyRowMapper<>(OrderDTO.class));
     }
 }

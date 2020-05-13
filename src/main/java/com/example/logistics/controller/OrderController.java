@@ -29,4 +29,9 @@ public class OrderController {
         orderDTO.setOrderId(id);
         return ResponseEntity.ok(orderService.updateById(orderDTO));
     }
+
+    @GetMapping("/api/v1/orders/{id}")
+    public ResponseEntity<OrderDTO> selectById(@PathVariable String id) {
+        return ResponseEntity.ok(orderService.selectById(id));
+    }
 }

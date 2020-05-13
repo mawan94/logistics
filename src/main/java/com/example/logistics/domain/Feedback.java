@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Feedback {
     private int id;
-    private int rate;
+    private Integer rate;
     private String orderId;
     private String staffId;
     private String customerId;
