@@ -14,4 +14,8 @@ public class OrderDTO {
     private String remark;
     private String customerId;
     private String nickName;
+    private String recipient;
+    private String recipientAddress;
+    private String recipientPhone;
+    private String courierFee;
 }

@@ -26,7 +26,11 @@ public class OrderDao {
             "       f.rate," +
             "       f.remark ," +
             "       c.id as customerId ," +
-            "       c.nickname " +
+            "       c.nickname ," +
+            "       o.recipient ," +
+            "       o.recipient_address ," +
+            "       o.recipient_phone ," +
+            "       o.courier_fee " +
             "from `order` o " +
             "         left join customer c on o.customer_id = c.id" +
             "         left join feedback f on c.id = f.customer_id" +
