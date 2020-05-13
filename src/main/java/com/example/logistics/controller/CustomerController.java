@@ -1,6 +1,7 @@
 package com.example.logistics.controller;
 
 import com.example.logistics.domain.Customer;
+import com.example.logistics.dto.LoginDTO;
 import com.example.logistics.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,5 +28,10 @@ public class CustomerController {
     @GetMapping("/api/vi/customers")
     public ResponseEntity<List<Customer>> selectCustomers(@RequestParam("type") Integer type) {
         return ResponseEntity.ok(customerService.selectCustomers(type));
+    }
+
+    @PostMapping("/api/vi/customers/login")
+    public ResponseEntity<Boolean> login(@RequestBody LoginDTO loginDTO) {
+        return ResponseEntity.ok(customerService.login(loginDTO));
     }
 }
