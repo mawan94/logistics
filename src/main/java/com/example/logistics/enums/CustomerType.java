@@ -1,4 +1,4 @@
-package com.example.logistics.domain;
+package com.example.logistics.enums;
 
 public enum CustomerType {
     ADMIN(1), DELIVERER(2), CUSTOMER(3);
