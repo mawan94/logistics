@@ -186,8 +186,7 @@
     }
 
     function changeOrderStatus(param) {
-        console.log(param)
-        // TODO MODIFY ORDER STATUS
+        //  MODIFY ORDER STATUS
         $.ajax({
             url: "http://localhost:8080/api/v1/orders/"+ param.orderId,//ajax的请求地址
             type: "post",//请求方式
