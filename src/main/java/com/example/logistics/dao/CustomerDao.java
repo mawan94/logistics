@@ -3,6 +3,7 @@ package com.example.logistics.dao;
 import com.example.logistics.domain.Customer;
 import com.example.logistics.dto.LoginDTO;
 import com.example.logistics.enums.CustomerType;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,9 +14,9 @@ import java.util.Collections;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class CustomerDao {
-    @Resource
-    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public Boolean insert(Customer customer) {
         int update = namedParameterJdbcTemplate.update("INSERT INTO customer(nickname, account, pwd, email, type) " +

@@ -1,7 +1,5 @@
 package com.example.logistics.dao;
 
-import com.example.logistics.domain.Customer;
-import com.example.logistics.domain.Order;
 import com.example.logistics.dto.OrderBO;
 import com.example.logistics.dto.OrderDTO;
 import lombok.RequiredArgsConstructor;
@@ -38,16 +36,16 @@ public class OrderDao {
             "       o.sender ," +
             "       o.delivery_person " +
             "from `order` o " +
-            "         left join customer c on o.customer_id = c.id" +
-            "         left join feedback f on c.id = f.customer_id" +
-            "         left join staff s on f.staff_id = s.id" +
+            "         left join customer c on o.id = c.id" +
+            "         left join feedback f on o.id = f.order_id" +
+            "         left join staff s on f.id = s.id" +
             " order by o.id desc";
 
     private static final String COUNT_SQL = "select count(1)" +
             "from `order` o" +
-            "         left join customer c on o.customer_id = c.id" +
-            "         left join feedback f on c.id = f.customer_id" +
-            "         left join staff s on f.staff_id = s.id";
+            "         left join customer c on o.id = c.id" +
+            "         left join feedback f on o.id = f.order_id" +
+            "         left join staff s on f.id = s.id";
 
     public Page<OrderDTO> page(Pageable pageable) {
         List<OrderDTO> data = namedParameterJdbcTemplate.query(SQL + " limit :offset, :pageSize", new BeanPropertySqlParameterSource(pageable),
@@ -68,7 +66,7 @@ public class OrderDao {
 
         String lastOrderId = namedParameterJdbcTemplate.queryForObject("SELECT id FROM `order` ORDER BY id DESC LIMIT 1", Collections.emptyMap(), String.class);
 
-        int feedback = namedParameterJdbcTemplate.update(String.format("INSERT INTO feedback(order_id) VALUES('%s')", lastOrderId), Collections.emptyMap());
+        int feedback = namedParameterJdbcTemplate.update(String.format("INSERT INTO feedback(order_id, rate) VALUES('%s', 5)", lastOrderId), Collections.emptyMap());
 
         return namedParameterJdbcTemplate.update(sql.toString(), Collections.emptyMap()) >= 1 && feedback >= 1;
     }
