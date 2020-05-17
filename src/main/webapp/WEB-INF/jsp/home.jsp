@@ -185,10 +185,52 @@
         $("#page-bar").html(pageBarDOM)
     }
 
+    function downloadPDF(orderId) {
+
+        //     fetch(CONSTANT.URL + '/rating/kanban/operation/generateExcel', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(this.condition),
+        //     })
+        //         .then(res => res.blob())
+        // .then(data => {
+        //         let blobUrl = window.URL.createObjectURL(data)
+        //         const a = document.createElement('a')
+        //         a.style.display = 'none'
+        //     a.download = 'temp.xls'
+        //     a.href = blobUrl
+        //     a.click()
+        // })
+
+
+        $.ajax({
+            url: "http://localhost:8080/api/orders/one/pdf?orderId=" + orderId,//ajax的请求地址
+            type: "get",//请求方式
+            contentType: "application/json;charset=UTF-8",
+            async: false, //是否异步 true为异步,false为同步
+            success: function (data) { //异步成功回调
+                var blobUrl = window.URL.createObjectURL(data)
+                var a = document.createElement('a')
+                a.style.display = 'none'
+                a.download = 'temp.xls'
+                a.href = blobUrl
+                a.click()
+            },
+            error: function (msg) { //ajax失败回调
+                alert("ajax发送失败:" + msg);
+            }
+        });
+
+
+    }
+
     function changeOrderStatus(param) {
+
         //  MODIFY ORDER STATUS
         $.ajax({
-            url: "http://localhost:8080/api/v1/orders/"+ param.orderId,//ajax的请求地址
+            url: "http://localhost:8080/api/v1/orders/" + param.orderId,//ajax的请求地址
             type: "post",//请求方式
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify(param),
@@ -242,6 +284,7 @@
                 "        <td>" + item.courierFee + "</td>\n" +
                 "        <td>" + (item.rate ? item.rate + '✨' : '') + "</td>\n" +
                 "        <td>" + (item.remark ? item.remark : '') + "</td>\n" +
+                "        <td><a download='test.pdf' href='http://localhost:8080/api/orders/one/pdf?orderId=" + item.orderId + "'>DOWNLOAD</a></td>\n" +
                 "    </tr>"
         })
 
@@ -258,6 +301,7 @@
             "        <th>COURIER_FEE</th>\n" +
             "        <th>RATE</th>\n" +
             "        <th>REMARK</th>\n" +
+            "        <th>DOWNLOAD</th>\n" +
             "    </tr>" + pageListDOM
         )
     }
